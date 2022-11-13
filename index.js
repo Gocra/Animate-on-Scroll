@@ -1,8 +1,12 @@
+/*
+  I created this function because I originally used autofit for the grid
+  now I have repeat 4 columns, so I could just go to the next row every 4
+*/
 const convertGridToRows = (grid) => {
   const gridElements = [...grid.children];
   let rows = [[]];
-
   let currentY = gridElements[0].getBoundingClientRect().y;
+
   gridElements.forEach((child, i) => {
     const newY = child.getBoundingClientRect().y;
     if (newY > currentY) {
@@ -19,12 +23,14 @@ const observer = new IntersectionObserver((entries) => {
   entries.forEach((entry) => {
     if (entry.isIntersecting) {
       entry.target.classList.add("show");
+    } else {
+      entry.target.classList.remove("show");
     }
   });
 });
 
 // add delay to all grid elements
-const GRID_TRANSITION_DELAY = 250;
+const GRID_TRANSITION_DELAY = 150;
 const grids = document.querySelectorAll(".grid");
 
 grids.forEach((grid) => {
